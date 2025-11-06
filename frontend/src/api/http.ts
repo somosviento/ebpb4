@@ -54,11 +54,22 @@ async function parseJsonSafe(res: Response): Promise<any | undefined> {
   return undefined
 }
 
+const DEFAULT_API_BASE = (import.meta.env as any).VITE_API_BASE || ''
+
+function resolveUrl(url: string) {
+  // If url is absolute (starts with http) or already contains the base, leave it
+  if (/^https?:\/\//i.test(url)) return url
+  if (DEFAULT_API_BASE && url.startsWith(DEFAULT_API_BASE)) return url
+  // Ensure proper joining (no duplicate slashes)
+  return `${DEFAULT_API_BASE.replace(/\/$/, '')}${url.startsWith('/') ? '' : '/'}${url}`
+}
+
 export function useHttp() {
   const { token } = useAuth()
 
   const request = React.useCallback(async function request<T>(url: string, opts: HttpOptions = {}): Promise<T> {
-    const res = await doFetch(url, opts, token)
+  const fullUrl = resolveUrl(url)
+  const res = await doFetch(fullUrl, opts, token)
     const data = await parseJsonSafe(res)
     if (!res.ok) {
       if (res.status === 422 && data) {

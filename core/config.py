@@ -9,6 +9,8 @@ class Settings(BaseSettings):
     sqlalchemy_database_url: str = Field(default="sqlite:///./ebpb.db", alias="DATABASE_URL")
     export_openapi: bool = Field(default=False, alias="EXPORT_OPENAPI")
     admin_token: str | None = Field(default=None, alias="ADMIN_TOKEN")
+    # Base path where the app is mounted behind a proxy (e.g., '/ebpb')
+    root_path: str | None = Field(default=None, alias="ROOT_PATH")
 
     class Config:
         env_file = ".env"
