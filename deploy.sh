@@ -20,7 +20,10 @@ echo ""
 echo "2. Building frontend..."
 cd "$FRONTEND_DIR"
 npm install
-VITE_BASE="$BASE_PATH" npm run build
+# VITE_BASE: para rutas del router y assets (/ebpb/)
+# VITE_API_BASE: base path para requests del API (/ebpb)
+# Las rutas ya incluyen /api/, entonces /api/login se convierte en /ebpb/api/login
+VITE_BASE="$BASE_PATH" VITE_API_BASE="/ebpb" npm run build
 
 echo ""
 echo "3. Deploying frontend to $WEB_DIR..."
