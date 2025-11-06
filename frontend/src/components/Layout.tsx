@@ -1,4 +1,7 @@
 import { ReactNode, useEffect, useState } from 'react'
+import logo5Url from '../../img/logo5.png'
+import logoEbpbUrl from '../../img/logo_ebpb.png'
+import logoWebUrl from '../../img/logo-web.png'
 import NotificationCenter from './NotificationCenter'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
@@ -15,8 +18,8 @@ export default function Layout({ children }: { children: ReactNode }) {
       <header className="navbar navbar-expand-md navbar-dark app-navbar shadow-sm">
         <div className="container">
           <Link to="/" className="navbar-brand d-flex align-items-center">
-            <img src="/img/logo5.png" alt="Logo 5" className="me-2" style={{ height: '32px' }} />
-            <img src="/img/logo_ebpb.png" alt="EBPB Logo" className="me-2" style={{ height: '32px' }} />
+            <img src={logo5Url} alt="Logo 5" className="me-2" style={{ height: '32px' }} />
+            <img src={logoEbpbUrl} alt="EBPB Logo" className="me-2" style={{ height: '32px' }} />
             <span className="fw-semibold">EBPB4</span>
           </Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +69,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       </main>
       <footer className="footer mt-auto">
         <div className="container d-flex justify-content-between align-items-center">
-          <img src="/img/logo-web.png" alt="Logo Web" style={{ height: '70px' }} />
+          <img src={logoWebUrl} alt="Logo Web" style={{ height: '70px' }} />
           <div className="text-muted">© 2025 - Todos los derechos reservados</div>
         </div>
       </footer>

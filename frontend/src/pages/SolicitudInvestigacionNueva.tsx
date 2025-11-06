@@ -284,7 +284,7 @@ export default function SolicitudInvestigacionNueva() {
 
           <div className="alert alert-info mt-3" role="alert">
             <small>
-              El investigador responsable y su equipo de ayudantes, declaran conocer el <a href="/Reglamento de uso de la Estación Biológica Puerto Blest.pdf" target="_blank" rel="noopener noreferrer">"Reglamento de uso"</a> de la Estación Biológica Puerto Blest. El grupo deberá designar a un integrante como responsable de las actividades que realizan tanto en el campo como en la EBPB.
+              El investigador responsable y su equipo de ayudantes, declaran conocer el <a href={`${import.meta.env.BASE_URL}Reglamento de uso de la Estación Biológica Puerto Blest.pdf`} target="_blank" rel="noopener noreferrer">"Reglamento de uso"</a> de la Estación Biológica Puerto Blest. El grupo deberá designar a un integrante como responsable de las actividades que realizan tanto en el campo como en la EBPB.
             </small>
           </div>
 

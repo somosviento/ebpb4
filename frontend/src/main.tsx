@@ -6,7 +6,7 @@ import './styles.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <style>{`@keyframes spin {from {transform: rotate(0deg);} to {transform: rotate(360deg);} }`}</style>
       <App />
     </BrowserRouter>

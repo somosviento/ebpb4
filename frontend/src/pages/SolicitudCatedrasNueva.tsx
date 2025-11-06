@@ -257,7 +257,7 @@ export default function SolicitudCatedrasNueva() {
 
           <div className="alert alert-info mt-3" role="alert">
             <small>
-              El equipo docente declara conocer el <a href="/Reglamento de uso de la Estación Biológica Puerto Blest.pdf" target="_blank" rel="noopener noreferrer">"Reglamento de uso"</a> de la Estación Biológica Puerto Blest.
+              El equipo docente declara conocer el <a href={`${import.meta.env.BASE_URL}Reglamento de uso de la Estación Biológica Puerto Blest.pdf`} target="_blank" rel="noopener noreferrer">"Reglamento de uso"</a> de la Estación Biológica Puerto Blest.
             </small>
           </div>
 
