@@ -8,12 +8,19 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
+const BASE = (import.meta as any).env?.BASE_URL || '/'
+const STORAGE_KEY = `${String(BASE).replace(/\/$/, '') || '/'}:token`
+
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [token, setToken] = useState<string | null>(() => localStorage.getItem('token'))
+  const [token, setToken] = useState<string | null>(() => {
+    try { return localStorage.getItem(STORAGE_KEY) } catch { return null }
+  })
 
   useEffect(() => {
-    if (token) localStorage.setItem('token', token)
-    else localStorage.removeItem('token')
+    try {
+      if (token) localStorage.setItem(STORAGE_KEY, token)
+      else localStorage.removeItem(STORAGE_KEY)
+    } catch { /* ignore storage */ }
   }, [token])
 
   const value = useMemo(

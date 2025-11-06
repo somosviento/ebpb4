@@ -21,10 +21,12 @@ function useGlobalApiErrors() {
   const { logout, token } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
+  const BASE = (import.meta as any).env?.BASE_URL || '/'
+  const REDIRECT_KEY = `${String(BASE).replace(/\/$/, '') || '/'}:postLoginRedirect`
   useEffect(() => {
     const original = window.fetch
     window.fetch = async (...args) => {
-      const currentPath = location.pathname + location.search + location.hash
+  const currentPath = location.pathname + location.search + location.hash
       let res: Response
       try {
         res = await original(...(args as Parameters<typeof fetch>))
@@ -36,7 +38,7 @@ function useGlobalApiErrors() {
         if (res.status === 401) {
           // Guardar ruta previa sólo si había token (sesión expirada / invalida)
             if (token) {
-            try { sessionStorage.setItem('postLoginRedirect', currentPath) } catch { /* ignore */ }
+            try { sessionStorage.setItem(REDIRECT_KEY, currentPath) } catch { /* ignore */ }
             logout()
             push({ type: 'error', message: 'Sesión expirada. Ingresá nuevamente.', autoCloseMs: 5000 })
             navigate('/login', { replace: true })

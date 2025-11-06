@@ -11,6 +11,8 @@ export default function LoginPage() {
   const navigate = useNavigate()
   const { login } = useAuth()
   const apiClient = useApiClient()
+  const BASE = (import.meta as any).env?.BASE_URL || '/'
+  const REDIRECT_KEY = `${String(BASE).replace(/\/$/, '') || '/'}:postLoginRedirect`
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -39,10 +41,10 @@ export default function LoginPage() {
       
       let target = '/admin/reservas'
       try {
-        const stored = sessionStorage.getItem('postLoginRedirect')
+        const stored = sessionStorage.getItem(REDIRECT_KEY)
         if (stored) {
           target = stored
-          sessionStorage.removeItem('postLoginRedirect')
+          sessionStorage.removeItem(REDIRECT_KEY)
         }
       } catch { /* ignore */ }
       
