@@ -49,40 +49,44 @@ export default function ReservaDetalleList({ value, onChange, readOnly, errors }
       {value.map((r, idx) => (
         <div key={idx} className="card mb-2">
           <div className="card-body">
-            <div className="mb-2">
-              <label className="form-label" htmlFor={`fecha-${idx}`}>Fecha</label>
-              <input
-                id={`fecha-${idx}`}
-                className="form-control"
-                type="date"
-                value={r.fecha}
-                disabled={readOnly}
-                onChange={(e) => update(idx, { fecha: e.target.value })}
-                onBlur={() => onBlur(idx)}
-              />
-            </div>
-            {errors?.[`reservas_detalladas.${idx}.fecha`] && (
-              <div role="alert" className="text-danger small">
-                {errors[`reservas_detalladas.${idx}.fecha`][0]}
+            <div className="row mb-2">
+              <div className="col-md-4">
+                <label className="form-label" htmlFor={`fecha-${idx}`}>Fecha</label>
+                <input
+                  id={`fecha-${idx}`}
+                  className="form-control"
+                  type="date"
+                  value={r.fecha}
+                  disabled={readOnly}
+                  onChange={(e) => update(idx, { fecha: e.target.value })}
+                  onBlur={() => onBlur(idx)}
+                />
+                {errors?.[`reservas_detalladas.${idx}.fecha`] && (
+                  <div role="alert" className="text-danger small">
+                    {errors[`reservas_detalladas.${idx}.fecha`][0]}
+                  </div>
+                )}
               </div>
-            )}
-            <div className="form-check form-check-inline">
-              <input className="form-check-input" id={`diurno-${idx}`} type="checkbox" checked={!!r.es_diurno} disabled={readOnly} onChange={(e) => update(idx, { es_diurno: e.target.checked })} />
-              <label className="form-check-label" htmlFor={`diurno-${idx}`}>Diurno</label>
-            </div>
-            <div className="form-check form-check-inline">
-              <input className="form-check-input" id={`pernocte-${idx}`} type="checkbox" checked={!!r.es_pernocte} disabled={readOnly} onChange={(e) => update(idx, { es_pernocte: e.target.checked })} />
-              <label className="form-check-label" htmlFor={`pernocte-${idx}`}>Pernocte</label>
+              <div className="col-md-8 d-flex align-items-end gap-3">
+                <div className="form-check">
+                  <input className="form-check-input" id={`diurno-${idx}`} type="checkbox" checked={!!r.es_diurno} disabled={readOnly} onChange={(e) => update(idx, { es_diurno: e.target.checked })} />
+                  <label className="form-check-label" htmlFor={`diurno-${idx}`}>Diurno</label>
+                </div>
+                <div className="form-check">
+                  <input className="form-check-input" id={`pernocte-${idx}`} type="checkbox" checked={!!r.es_pernocte} disabled={readOnly} onChange={(e) => update(idx, { es_pernocte: e.target.checked })} />
+                  <label className="form-check-label" htmlFor={`pernocte-${idx}`}>Pernocte</label>
+                </div>
+                {!readOnly && (
+                  <button type="button" className="btn btn-light btn-sm" onClick={() => remove(idx)}>
+                    <i className="bi bi-x-circle me-1"></i>Quitar
+                  </button>
+                )}
+              </div>
             </div>
           {errors?.[`reservas_detalladas.${idx}.turno`] && (
             <div role="alert" className="text-danger small">
               {errors[`reservas_detalladas.${idx}.turno`][0]}
             </div>
-          )}
-          {!readOnly && (
-            <button type="button" className="btn btn-light btn-sm mt-2" onClick={() => remove(idx)}>
-              <i className="bi bi-x-circle me-1"></i>Quitar
-            </button>
           )}
           </div>
         </div>

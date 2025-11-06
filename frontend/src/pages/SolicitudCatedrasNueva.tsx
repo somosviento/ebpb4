@@ -103,7 +103,7 @@ export default function SolicitudCatedrasNueva() {
   }
 
   return (
-    <div>
+    <div className="container" style={{ maxWidth: '900px' }}>
       <h1>Nueva Solicitud Cátedras</h1>
       <form onSubmit={onSubmit} noValidate>
         <fieldset disabled={submitting} style={{ border: 'none', padding: 0 }}>
@@ -122,15 +122,17 @@ export default function SolicitudCatedrasNueva() {
             <input id="responsable_email_principal" className="form-control" type="email" value={form.responsable_email_principal} onChange={(e) => update('responsable_email_principal', e.target.value)} required />
             {fieldError('responsable_email_principal') && <div className="text-danger small" role="alert">{fieldError('responsable_email_principal')}</div>}
           </div>
-          <div className="mb-3">
-            <label className="form-label" htmlFor="fecha_inicio_actividad_general">Fecha Inicio Actividad *</label>
-            <input id="fecha_inicio_actividad_general" className="form-control" type="date" value={form.fecha_inicio_actividad_general} onChange={(e) => update('fecha_inicio_actividad_general', e.target.value)} required />
-            {fieldError('fecha_inicio_actividad_general') && <div className="text-danger small" role="alert">{fieldError('fecha_inicio_actividad_general')}</div>}
-          </div>
-          <div className="mb-3">
-            <label className="form-label" htmlFor="fecha_fin_actividad_general">Fecha Fin Actividad *</label>
-            <input id="fecha_fin_actividad_general" className="form-control" type="date" value={form.fecha_fin_actividad_general} onChange={(e) => update('fecha_fin_actividad_general', e.target.value)} required />
-            {fieldError('fecha_fin_actividad_general') && <div className="text-danger small" role="alert">{fieldError('fecha_fin_actividad_general')}</div>}
+          <div className="row mb-3">
+            <div className="col-md-6">
+              <label className="form-label" htmlFor="fecha_inicio_actividad_general">Fecha Inicio Actividad *</label>
+              <input id="fecha_inicio_actividad_general" className="form-control" type="date" value={form.fecha_inicio_actividad_general} onChange={(e) => update('fecha_inicio_actividad_general', e.target.value)} required />
+              {fieldError('fecha_inicio_actividad_general') && <div className="text-danger small" role="alert">{fieldError('fecha_inicio_actividad_general')}</div>}
+            </div>
+            <div className="col-md-6">
+              <label className="form-label" htmlFor="fecha_fin_actividad_general">Fecha Fin Actividad *</label>
+              <input id="fecha_fin_actividad_general" className="form-control" type="date" value={form.fecha_fin_actividad_general} onChange={(e) => update('fecha_fin_actividad_general', e.target.value)} required />
+              {fieldError('fecha_fin_actividad_general') && <div className="text-danger small" role="alert">{fieldError('fecha_fin_actividad_general')}</div>}
+            </div>
           </div>
           <div className="mb-3">
             <label className="form-label" htmlFor="objetivos">Objetivos *</label>
