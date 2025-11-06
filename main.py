@@ -1,7 +1,5 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from starlette.middleware.base import BaseHTTPMiddleware
-from starlette.middleware.root_path import RootPathMiddleware
 import os
 from pathlib import Path
 
@@ -16,12 +14,9 @@ settings = get_settings()
 # read from settings (env .env) or fallback to OS env var
 root_path = (settings.root_path or os.environ.get('ROOT_PATH') or '').strip()
 
-# Create FastAPI app; when behind a proxy that rewrites path, RootPathMiddleware
-# will ensure URL generation and OpenAPI reflect the mounted path.
-app = FastAPI(title="EBPB Reservas API", version="0.1.0")
-if root_path:
-    # Starlette's RootPathMiddleware updates request.scope['root_path']
-    app.add_middleware(RootPathMiddleware, root_path=root_path)
+# Create FastAPI app; pass root_path directly so URL generation and OpenAPI
+# reflect the mounted base path when behind a reverse proxy.
+app = FastAPI(title="EBPB Reservas API", version="0.1.0", root_path=root_path or "")
 
 # CORS (tune as needed)
 app.add_middleware(
