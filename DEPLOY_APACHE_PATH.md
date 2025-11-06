@@ -40,6 +40,19 @@ DATABASE_URL=sqlite:///./ebpb.db
 EXPORT_OPENAPI=0
 ```
 
+Quick helper to create a minimal .env from the shell (edit afterwards):
+
+```bash
+cat > /opt/ebpb4/.env <<'EOF'
+API_PREFIX=/api
+ROOT_PATH=/ebpb
+SECRET_KEY=$(python3 -c 'import secrets; print(secrets.token_urlsafe(32))')
+ADMIN_TOKEN=$(python3 -c 'import secrets; print(secrets.token_urlsafe(32))')
+DATABASE_URL=sqlite:///./ebpb.db
+EXPORT_OPENAPI=0
+EOF
+```
+
 4. Create a systemd unit `/etc/systemd/system/ebpb-api.service` (adjust paths):
 
 ```ini
