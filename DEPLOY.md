@@ -69,6 +69,7 @@ Contenido del archivo `.env`:
 ```env
 # API Configuration
 API_PREFIX=/api
+ROOT_PATH=
 SECRET_KEY=tu_clave_secreta_muy_segura_cambiala_urgente
 ADMIN_TOKEN=tu_token_admin_seguro
 
@@ -78,6 +79,10 @@ DATABASE_URL=sqlite:///./ebpb.db
 # OpenAPI
 EXPORT_OPENAPI=false
 ```
+
+**Importante sobre ROOT_PATH:**
+- Si servís la app desde la raíz del dominio (ej: `http://tudominio.com/`), dejá `ROOT_PATH=` vacío
+- Si servís desde un subdirectorio (ej: `http://tudominio.com/ebpb/`), configurá `ROOT_PATH=/ebpb`
 
 **IMPORTANTE**: Genera claves seguras para `SECRET_KEY` y `ADMIN_TOKEN`:
 
@@ -126,10 +131,20 @@ sudo journalctl -u ebpb-api -f
 ```bash
 cd /var/www/ebpb4/frontend
 npm install
+
+# Para deployment en la raíz del dominio (http://tudominio.com/)
 npm run build
+
+# O si vas a servir desde un subdirectorio (http://tudominio.com/ebpb/)
+# VITE_BASE=/ebpb/ npm run build
 ```
 
 Esto generará los archivos estáticos en `/var/www/ebpb4/frontend/dist/`
+
+**Nota:** Si servís desde un subdirectorio, también necesitás:
+1. Configurar `ROOT_PATH` en el `.env` del backend (ej: `ROOT_PATH=/ebpb`)
+2. Ajustar la configuración de Apache para que sirva desde ese path
+3. Ver `DEPLOY_APACHE_PATH.md` para instrucciones detalladas de deployment en subdirectorio
 
 ## 5. Configuración de Apache
 
