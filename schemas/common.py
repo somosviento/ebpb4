@@ -2,6 +2,10 @@ from __future__ import annotations
 
 from datetime import date
 from pydantic import BaseModel, Field, EmailStr
+from typing import List, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .reservas import ReservaDetalleCreate
 
 
 class FechasUsoGeneral(BaseModel):
@@ -16,6 +20,7 @@ class ResponsableInfo(BaseModel):
     responsable_email_alternativo: EmailStr | None = None
     responsable_telefono: str | None = None
     responsable_direccion_postal: str | None = None
+    responsable_reservas_detalladas: List['ReservaDetalleCreate'] = []
 
 
 class ParticipanteBase(BaseModel):

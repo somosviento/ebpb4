@@ -67,6 +67,19 @@ def create_solicitud(db: Session, solicitud: SolicitudInvestigacionCreate | Soli
         db.add(model)
         db.flush()  # get model.id
 
+        # Create responsable's reservas if any
+        if solicitud.responsable_reservas_detalladas:
+            # Create a participante for the responsable
+            from schemas.participantes import ParticipanteCreate
+            responsable_participante = ParticipanteCreate(
+                apellido=solicitud.responsable_apellido_nombre.split()[-1] if solicitud.responsable_apellido_nombre else '',
+                nombres=' '.join(solicitud.responsable_apellido_nombre.split()[:-1]) if solicitud.responsable_apellido_nombre else '',
+                dni=solicitud.responsable_dni,
+                rol='Responsable',
+                reservas_detalladas=solicitud.responsable_reservas_detalladas
+            )
+            create_participante_with_reservas(db, responsable_participante, model.id)
+
         # Create participants and their reservas
         integrantes = (
             solicitud.integrantes if hasattr(solicitud, "integrantes") else []  # type: ignore[attr-defined]

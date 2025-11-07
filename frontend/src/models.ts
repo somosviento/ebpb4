@@ -48,6 +48,7 @@ export interface SolicitudBaseCommon {
   responsable_email_alternativo?: string | null
   responsable_telefono?: string | null
   responsable_direccion_postal?: string | null
+  responsable_reservas_detalladas: ReservaDetalleCreate[]
   fecha_inicio_actividad_general: string // date
   fecha_fin_actividad_general: string // date
   objetivos: string

@@ -33,8 +33,8 @@ export default function Layout({ children }: { children: ReactNode }) {
                   Cargar nueva reserva
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="reservaMenu">
-                  <li><NavLink className={({isActive}) => `dropdown-item${isActive ? ' active' : ''}`} to="/solicitudes/nueva/catedras">Cargar Cátedra</NavLink></li>
-                  <li><NavLink className={({isActive}) => `dropdown-item${isActive ? ' active' : ''}`} to="/solicitudes/nueva/investigacion">Cargar Equipo de Investigación</NavLink></li>
+                  <li><NavLink className={({isActive}) => `dropdown-item${isActive ? ' active' : ''}`} to="/solicitudes/nueva/catedras">Cátedra</NavLink></li>
+                  <li><NavLink className={({isActive}) => `dropdown-item${isActive ? ' active' : ''}`} to="/solicitudes/nueva/investigacion">Equipo de Investigación</NavLink></li>
                 </ul>
               </li>
               {token && (

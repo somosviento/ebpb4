@@ -4,6 +4,7 @@ import { useApiClient, ApiError } from '../api/client'
 import { SolicitudInvestigacionCreate, ParticipanteCreate } from '../models'
 import { saveLastSolicitud } from '../utils/storage'
 import ParticipanteForm from '../components/ParticipanteForm'
+import ReservaDetalleList from '../components/ReservaDetalleList'
 import { useNotifications } from '../context/NotificationContext'
 import { validateSolicitudInvestigacion } from '../utils/validateSolicitud'
 import Spinner from '../components/Spinner'
@@ -29,6 +30,7 @@ export default function SolicitudInvestigacionNueva() {
     responsable_apellido_nombre: '',
     responsable_dni: '',
     responsable_email_principal: '',
+    responsable_reservas_detalladas: [],
     fecha_inicio_actividad_general: '',
     fecha_fin_actividad_general: '',
     objetivos: '',
@@ -157,6 +159,17 @@ export default function SolicitudInvestigacionNueva() {
             <input id="responsable_email_principal" className="form-control" name="responsable_email_principal" type="email" aria-invalid={!!fieldError('responsable_email_principal')} aria-describedby={fieldError('responsable_email_principal') ? 'err-resp-email' : undefined} value={form.responsable_email_principal} onChange={(e) => update('responsable_email_principal', e.target.value)} required />
             {fieldError('responsable_email_principal') && <div id="err-resp-email" className="text-danger small" role="alert">{fieldError('responsable_email_principal')}</div>}
           </div>
+
+          <div className="mb-4">
+            <h5 className="mb-3">Reservas del Responsable</h5>
+            <p className="text-muted small">Indique las fechas en que el responsable necesita pernoctar en la estación.</p>
+            <ReservaDetalleList
+              value={form.responsable_reservas_detalladas}
+              onChange={(val) => update('responsable_reservas_detalladas', val)}
+              errors={errors}
+            />
+          </div>
+
           <div className="row mb-3">
             <div className="col-md-6">
               <label className="form-label" htmlFor="fecha_inicio_actividad_general">Fecha Inicio Actividad *</label>
