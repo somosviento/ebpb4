@@ -20,7 +20,7 @@ class ResponsableInfo(BaseModel):
     responsable_email_alternativo: EmailStr | None = None
     responsable_telefono: str | None = None
     responsable_direccion_postal: str | None = None
-    responsable_reservas_detalladas: List['ReservaDetalleCreate'] = []
+    responsable_reservas_detalladas: List['ReservaDetalleCreate'] = Field(default_factory=list)
 
 
 class ParticipanteBase(BaseModel):

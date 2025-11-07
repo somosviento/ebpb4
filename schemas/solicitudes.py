@@ -6,6 +6,10 @@ from pydantic import BaseModel
 
 from .common import FechasUsoGeneral, ResponsableInfo
 from .participantes import ParticipanteCreate, ParticipanteOut
+from .reservas import ReservaDetalleCreate
+
+# Rebuild model to resolve forward references
+ResponsableInfo.model_rebuild()
 
 
 class SolicitudBaseCreate(FechasUsoGeneral, ResponsableInfo):
